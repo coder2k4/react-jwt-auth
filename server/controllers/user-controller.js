@@ -1,52 +1,56 @@
+const userService = require('../services/user-service.js')
+
 class UserController {
-    async registration (req, res, next) {
+    async registration(req, res, next) {
         try {
-
-        }
-        catch (e) {
-
+            const {email, password} = req.body
+            const userData = await userService.registration(email, password)
+            res.cookie('refreshToken', await userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true
+            })
+            return res.json(userData)
+        } catch (e) {
+            console.log(e)
         }
     }
-    async login (req, res, next) {
+
+    async login(req, res, next) {
         try {
 
-        }
-        catch (e) {
-
-        }
-    }
-    async logout (req, res, next) {
-        try {
-
-        }
-        catch (e) {
+        } catch (e) {
 
         }
     }
 
-    async activate (req, res, next) {
+    async logout(req, res, next) {
         try {
 
-        }
-        catch (e) {
+        } catch (e) {
 
         }
     }
 
-    async refreshToken (req, res, next) {
+    async activate(req, res, next) {
         try {
 
-        }
-        catch (e) {
+        } catch (e) {
 
         }
     }
 
-    async getUser (req, res, next) {
+    async refreshToken(req, res, next) {
         try {
-            res.json(['123','456'])
+
+        } catch (e) {
+
         }
-        catch (e) {
+    }
+
+    async getUser(req, res, next) {
+        try {
+            res.json(['123', '456'])
+        } catch (e) {
 
         }
     }
